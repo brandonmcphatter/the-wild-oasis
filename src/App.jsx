@@ -9,17 +9,23 @@ import Bookings from "./pages/Bookings.jsx";
 import Login from "./pages/Login.jsx";
 import GlobalStyles from "./styles/GlobalStyles.js";
 import AppLayout from "./ui/AppLayout.jsx";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {Toaster} from "react-hot-toast";
 
-
-// const StyledApp = styled.div`
-//     background-color: white;
-//     padding: 20px;
-// `
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 0,
+        }
+    }
+})
 
 function App() {
 
     return (
-        <>
+        <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false}/>
             <GlobalStyles/>
             <BrowserRouter>
                 <Routes>
@@ -32,11 +38,30 @@ function App() {
                         <Route path={'settings'} element={<Settings/>}/>
                         <Route path={'account'} element={<Account/>}/>
                     </Route>
-                        <Route path={'login'} element={<Login/>}/>
-                        <Route path={'*'} element={<PageNotFound/>}/>
+                    <Route path={'login'} element={<Login/>}/>
+                    <Route path={'*'} element={<PageNotFound/>}/>
                 </Routes>
             </BrowserRouter>
-        </>
+            <Toaster position={'top-center'}
+                     gutter={12}
+                     containerStyle={{margin: '8px'}}
+                     toastOptions={{
+                         success: {
+                             duration: 2000,
+                         },
+                         error: {
+                             duration: 2000,
+                         },
+                         style: {
+                             fontSize: '16px',
+                             maxWidth: '500px',
+                             padding: '16px 24px',
+                             background: 'var(--color-grey-700)',
+                             color: 'var(--color-grey-0)',
+                         },
+                     }}
+            />
+        </QueryClientProvider>
 
 
         // <>
