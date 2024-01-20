@@ -34,7 +34,7 @@ function App() {
                         <Route path={'dashboard'} element={<Dashboard/>}/>
                         <Route path={'bookings'} element={<Bookings/>}/>
                         <Route path={'cabins'} element={<Cabins/>}/>
-                        <Route path={'users'} element={<Users/>}/>
+                        <Route path={'user'} element={<Users/>}/>
                         <Route path={'settings'} element={<Settings/>}/>
                         <Route path={'account'} element={<Account/>}/>
                     </Route>
@@ -63,27 +63,6 @@ function App() {
             />
         </QueryClientProvider>
 
-
-        // <>
-        //     <GlobalStyles/>
-        //     <StyledApp>
-        //         <Row type={'horizontal'}>
-        //                 <Heading type={'h1'}>The Wild Oasis!</Heading>
-        //             <div>
-        //                 <Heading type={'h2'}>Check In and Out</Heading>
-        //                 <Button variation={'primary'} size={'medium'}>Check In</Button>
-        //                 <Button variation={'secondary'} size={'small'}>Check Out</Button>
-        //             </div>
-        //         </Row>
-        //         <Row type={'vertical'}>
-        //             <Heading as={'h3'}>Forms</Heading>
-        //             <form>
-        //             <Input type={'number'} placeholder={'Number of Guests'}/>
-        //             <Input type={'number'} placeholder={'Number of Guests'}/>
-        //             </form>
-        //         </Row>
-        //     </StyledApp>
-        // </>
     )
 }
 
