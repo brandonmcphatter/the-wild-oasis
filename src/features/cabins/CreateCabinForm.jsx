@@ -7,7 +7,7 @@ import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow.jsx";
 import {useCreateCabin} from "./useCreateCabin.js";
 
-function CreateCabinForm() {
+function CreateCabinForm({closeModal}) {
     const {register, handleSubmit, getValues, formState, reset} = useForm();
 
     const {errors} = formState;
@@ -16,14 +16,16 @@ const {isCreating, createCabin} = useCreateCabin();
 
     function onSubmit(data) {
         createCabin({...data, image: data.image[0]})
+        closeModal();
     }
 
     function onError(errors) {
         console.log(errors);
+        closeModal();
     }
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onError)}>
+        <Form onSubmit={handleSubmit(onSubmit, onError)} type={closeModal ? 'modal' : 'regular'}>
             <FormRow label={'Cabin Name'} error={errors?.name?.message}>
                 <Input type="text" id="name" {...register('name', {required: 'This Field is Required'})}/>
             </FormRow>
@@ -60,7 +62,7 @@ const {isCreating, createCabin} = useCreateCabin();
 
             <FormRow>
                 {/* type is an HTML attribute! */}
-                <Button variation="secondary" type="reset">
+                <Button variation="secondary" type="reset" onClick={() => closeModal?.()}>
                     Cancel
                 </Button>
                 <Button disabled={isCreating}>Add cabin</Button>
